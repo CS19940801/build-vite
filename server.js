@@ -69,6 +69,7 @@ app.use(async ctx=>{
             ctx.type = 'application/javascript'
             ctx.body = `
 ${rewriteImport(descriptor.script.content).replace('export default', 'const __script = ')}
+import "${url}?type=style"
 import { render as __render } from "${url}?type=template"
 __script.__hmrId = "${url}"
 __script.__file = "${path.resolve(__dirname, url.slice(1))}" 
@@ -86,11 +87,23 @@ export default __script
 
             ctx.type = 'application/javascript'
             ctx.body = rewriteImport(render)
-        } 
-        // else if (query.type == 'style') { 
-        //     // @todo 解析style
-        // }
+        }else if (query.type == 'style') { 
+            // @todo 解析style css
+            const styles = descriptor.styles[0].content
+            console.log(styles);
+            const content = `
+const css = '${styles.replace(/\n/g, '')}'
+let link = document.createElement('style')
+link.setAttribute('type','text/css')
+document.head.appendChild(link)
+link.innerHTML = css
+export default css`
+            
+            ctx.type = 'application/javascript'
+            ctx.body = content
+        }
     } else if (url.endsWith('.css')) {
+        // import css处理
         console.log(`解析css`);
         const p = path.resolve(__dirname, url.slice(1))
         const file = fs.readFileSync(p, 'utf-8')
@@ -113,10 +126,10 @@ export default css
     }
 })
 // 收集错误
-app.on('error', (err, ctx) => {
-    log.error('server error', err)
-    // log.error('server error', err, ctx)
-});
+// app.on('error', (err, ctx) => {
+//     log.error('server error', err)
+//     // log.error('server error', err, ctx)
+// });
 // 启动服务
 app.listen(3000,()=>{
     console.log(3000);

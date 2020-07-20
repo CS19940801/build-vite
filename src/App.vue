@@ -17,3 +17,13 @@ export default {
     }
 }
 </script>
+<style>
+    h1{
+        color: green;
+    }
+</style>
+<style lang="scss" scoped>
+    h1{
+        color: yellow;
+    }
+</style>
