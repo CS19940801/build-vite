@@ -1,0 +1,29 @@
+{
+  "name": "mini-vite",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CS19940801/build-vite.git"
+  },
+  "keywords": [
+    "vite",
+    "pratice"
+  ],
+  "author": "cs_enjoy",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CS19940801/build-vite/issues"
+  },
+  "homepage": "https://github.com/CS19940801/build-vite#readme",
+  "dependencies": {
+    "@vue/compiler-dom": "^3.0.0-rc.2",
+    "@vue/compiler-sfc": "^3.0.0-rc.2",
+    "koa": "^2.13.0",
+    "vue": "^3.0.0-rc.2"
+  }
+}
